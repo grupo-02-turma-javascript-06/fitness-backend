@@ -44,35 +44,10 @@ export class UsuarioService {
     if (buscaUsuario)
       throw new HttpException('O Usuario já existe!', HttpStatus.BAD_REQUEST);
 
-    const calcularIMC = (
-      peso: number,
-      altura: number,
-    ): { imc: number; classificacao: string } => {
-      if (peso <= 0 || altura <= 0) {
-        throw new HttpException(
-          'Peso e altura devem conter valores válidos',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-
-      const imc = peso / (altura * altura);
-      const imcArredondado = parseFloat(imc.toFixed(2));
-
-      const classificarIMC = (imc: number): string => {
-        if (imc < 18.5) return 'Abaixo do peso';
-        if (imc < 24.9) return 'Peso normal';
-        if (imc < 29.9) return 'Sobrepeso';
-        if (imc < 34.9) return 'Obesidade Grau I';
-        if (imc < 39.9) return 'Obesidade Grau II';
-        return 'Obesidade Grau III (Mórbida)';
-      };
-
-      const classificacao = classificarIMC(imcArredondado);
-
-      return { imc: imcArredondado, classificacao };
-    };
-
-    const { imc, classificacao } = calcularIMC(usuario.peso, usuario.altura);
+    const { imc, classificacao } = this.calcularIMC(
+      usuario.peso,
+      usuario.altura,
+    );
 
     usuario.imc = imc;
     usuario.classificacao = classificacao;
@@ -88,39 +63,42 @@ export class UsuarioService {
     if (buscaUsuario && buscaUsuario.id !== usuario.id)
       throw new HttpException('O Usuario já existe!', HttpStatus.BAD_REQUEST);
 
-    const calcularIMC = (
-      peso: number,
-      altura: number,
-    ): { imc: number; classificacao: string } => {
-      if (peso <= 0 || altura <= 0) {
-        throw new HttpException(
-          'Peso e altura devem conter valores válidos',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-
-      const imc = peso / (altura * altura);
-      const imcArredondado = parseFloat(imc.toFixed(2));
-
-      const classificarIMC = (imc: number): string => {
-        if (imc < 18.5) return 'Abaixo do peso';
-        if (imc < 24.9) return 'Peso normal';
-        if (imc < 29.9) return 'Sobrepeso';
-        if (imc < 34.9) return 'Obesidade Grau I';
-        if (imc < 39.9) return 'Obesidade Grau II';
-        return 'Obesidade Grau III (Mórbida)';
-      };
-
-      const classificacao = classificarIMC(imcArredondado);
-
-      return { imc: imcArredondado, classificacao };
-    };
-
-    const { imc, classificacao } = calcularIMC(usuario.peso, usuario.altura);
+    const { imc, classificacao } = this.calcularIMC(
+      usuario.peso,
+      usuario.altura,
+    );
 
     usuario.imc = imc;
     usuario.classificacao = classificacao;
 
     return await this.usuarioRepository.save(usuario);
   }
+
+  calcularIMC = (
+    peso: number,
+    altura: number,
+  ): { imc: number; classificacao: string } => {
+    if (peso <= 0 || altura <= 0) {
+      throw new HttpException(
+        'Peso e altura devem conter valores válidos',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const imc = peso / (altura * altura);
+    const imcArredondado = parseFloat(imc.toFixed(2));
+
+    const classificarIMC = (imc: number): string => {
+      if (imc < 18.5) return 'Abaixo do peso';
+      if (imc < 24.9) return 'Peso normal';
+      if (imc < 29.9) return 'Sobrepeso';
+      if (imc < 34.9) return 'Obesidade Grau I';
+      if (imc < 39.9) return 'Obesidade Grau II';
+      return 'Obesidade Grau III (Mórbida)';
+    };
+
+    const classificacao = classificarIMC(imcArredondado);
+
+    return { imc: imcArredondado, classificacao };
+  };
 }
