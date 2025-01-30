@@ -30,10 +30,10 @@ classDiagram
 class Categoria {
   - nome: string
   - descricao: string
-  + findAll() Produto[]
-  + findById() Produto
-  + create() Produto
-  + update() Produto
+  + findAll() Categoria[]
+  + findById() Categoria
+  + create() Categoria
+  + update() Categoria
   + delete() void
 }
 class Exercicio {
