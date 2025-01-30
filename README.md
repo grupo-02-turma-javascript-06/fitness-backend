@@ -71,7 +71,7 @@ Exercicio <|-- Categoria
 Adicione a imagem do Diagrama
 
 <div align="center">
-    <img src="" />
+  <img src="" />
 </div>
 
 ---
@@ -89,3 +89,9 @@ Adicione a imagem do Diagrama
 ---
 
 ## 6. Configuração e Execução
+
+1. Clone o repositório
+2. Configure o arquivo `.env`
+3. Instale as dependências `npm i` ou `npm install`
+4. Rode o projeto com `npm run start:dev` para ambiente de desenvolvimento
+5. Projeto está rodando por padrão em `http://localhost:3000`
