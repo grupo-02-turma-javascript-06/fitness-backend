@@ -1,8 +1,7 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { ILike, Repository } from "typeorm";
-import { Exercicio } from "../entities/exercicio.entity";
-
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ILike, Repository } from 'typeorm';
+import { Exercicio } from '../entities/exercicio.entity';
 
 @Injectable()
 export class ExercicioService {
@@ -12,12 +11,11 @@ export class ExercicioService {
   ) {}
 
   async findAll(): Promise<Exercicio[]> {
-    return await this.exercicioRepository.find({
-    });
+    return await this.exercicioRepository.find({});
   }
 
   async findById(id: number): Promise<Exercicio> {
-    let exercicio = await this.exercicioRepository.findOne({
+    const exercicio = await this.exercicioRepository.findOne({
       where: { id },
     });
 
@@ -41,8 +39,7 @@ export class ExercicioService {
   }
 
   async update(exercio: Exercicio): Promise<Exercicio> {
-
-    let exercicioExistente = await this.findById(exercio.id);
+    const exercicioExistente = await this.findById(exercio.id);
 
     if (!exercicioExistente) {
       throw new HttpException('Exercicio não encontrado', HttpStatus.NOT_FOUND);
@@ -52,7 +49,7 @@ export class ExercicioService {
   }
 
   async delete(id: number): Promise<void> {
-    let exercicioExistente = await this.findById(id);
+    const exercicioExistente = await this.findById(id);
 
     if (!exercicioExistente) {
       throw new HttpException('Exercicio não encontrado', HttpStatus.NOT_FOUND);

@@ -1,28 +1,47 @@
+import { Transform, TransformFnParams } from 'class-transformer';
 import { IsNotEmpty, IsPositive, Length } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({name: "tb_exercicio"})
+@Entity({ name: 'tb_exercicio' })
 export class Exercicio {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @IsNotEmpty()
-    @Column({ length: 100, nullable: false })
-    nome: string;
+  @IsNotEmpty()
+  @Transform(({ value }: TransformFnParams) => {
+    if (typeof value === 'string') {
+      return value.trim();
+    }
+    return '';
+  })
+  @Column({ length: 100, nullable: false })
+  nome: string;
 
-    @IsNotEmpty()
-    @Length(5, 255) // Valida se o tamanho da string é entre 5 e 255
-    @Column({ length: 255, nullable: false }) // Descrição detalhada
-    descricao: string;
+  @IsNotEmpty()
+  @Length(5, 255)
+  @Transform(({ value }: TransformFnParams) => {
+    if (typeof value === 'string') {
+      return value.trim();
+    }
+    return '';
+  })
+  @Column({ length: 255, nullable: false })
+  descricao: string;
 
-    @IsPositive() // Valida se o valor é maior que 0
-    @IsNotEmpty()
-    @Column({ type: "decimal", precision: 6, scale: 2, nullable: false }) // Preço do produto
-    carga: number;
+  @IsPositive()
+  @IsNotEmpty()
+  @Transform(({ value }: TransformFnParams) => {
+    if (typeof value === 'number') {
+      return value;
+    }
+    return 0;
+  })
+  @Column({ type: 'decimal', precision: 6, scale: 2, nullable: false })
+  carga: number;
 
-    @Column({type: 'int', default: 0})
-    repeticao: number;
+  @Column({ type: 'int', default: 0 })
+  repeticao: number;
 
-    @Column({ length: 10})
-    tempo: string;
+  @Column({ length: 10 })
+  tempo: string;
 }
