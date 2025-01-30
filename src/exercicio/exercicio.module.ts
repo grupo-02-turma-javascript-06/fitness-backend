@@ -8,6 +8,6 @@ import { ExercicioController } from './controllers/exercicio.controller';
   imports: [TypeOrmModule.forFeature([Exercicio])],
   providers: [ExercicioService],
   controllers: [ExercicioController],
-  exports: [],
+  exports: [TypeOrmModule],
 })
 export class ExercicioModule {}

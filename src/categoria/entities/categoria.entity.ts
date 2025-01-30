@@ -1,6 +1,7 @@
 import { Transform, TransformFnParams } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Exercicio } from '../../exercicio/entities/exercicio.entity';
 
 @Entity({ name: 'tb_categorias' })
 export class Categoria {
@@ -26,4 +27,7 @@ export class Categoria {
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
   descricao: string;
+
+  @OneToMany(() => Exercicio, (exercicio) => exercicio.categoria)
+  exercicio: Exercicio[];
 }
