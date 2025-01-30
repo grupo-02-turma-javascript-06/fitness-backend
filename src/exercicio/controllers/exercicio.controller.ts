@@ -13,7 +13,7 @@ import {
 import { ExercicioService } from '../services/exercicio.service';
 import { Exercicio } from '../entities/exercicio.entity';
 
-@Controller('exercicio')
+@Controller('/exercicio')
 export class ExercicioController {
   constructor(private readonly exercicioService: ExercicioService) {}
 
