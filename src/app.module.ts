@@ -19,7 +19,7 @@ import { Categoria } from './categoria/entities/categoria.entity';
       entities: [Categoria],
       synchronize: true,
     }),
-    CategoriaModule
+    CategoriaModule,
   ],
   controllers: [],
   providers: [],
