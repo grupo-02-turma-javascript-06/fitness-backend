@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Usuario } from './usuarios/entities/usuario.entity';
+import { UsuarioModule } from './usuarios/usuarios.module';
 import { Exercicio } from './exercicio/entities/exercicio.entity';
 import { ExercicioModule } from './exercicio/exercicio.module';
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -16,10 +17,10 @@ import { ExercicioModule } from './exercicio/exercicio.module';
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || 'root',
       database: process.env.DB_NAME || 'db_fitness',
-      entities: [Exercicio],
+      entities: [Usuario, Exercicio],
       synchronize: true,
     }),
-    ExercicioModule,
+    UsuarioModule, ExercicioModule,
   ],
   controllers: [],
   providers: [],
