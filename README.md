@@ -10,16 +10,19 @@
 
 ## 1. Descrição
 
+Essa aplicação foi desenvolvida com o objetivo de ajudar pessoas a se organizarem melhor e registrarem os exercícios que realizam na academia. Para isso, oferecemos um sistema completo de cadastro de exercícios, permitindo a categorização detalhada de cada atividade. Além disso, os exercícios podem ser acompanhados por informações como carga utilizada, número de repetições e tempo de execução. Dessa forma, os usuários conseguem manter um histórico preciso e estruturado, evitando que informações importantes, mas muitas vezes esquecidas por serem simples e curtas, se percam ao longo do tempo.
+
 ---
 
 ## 2. Sobre esta API
 
+API foi criada para fazer gestão de exercícios, cargas, tempo e repetição, onde pode ser registrada essas informações, também deixando-as disponíveis para possíveis alterações e até mesmo exclusão.
+
 ### 2.1. Principais Funcionalidades
 
-1.
-2.
-3.
-4.
+1. Criação, atualização, buscar geral, busca específica por ID, busca por nome de usuário e o cálculo automático do IMC.
+2. Criação, atualização, deleção, busca geral, busca específica por ID e busca por nome de exercício.
+3. Criação, atualização, deleção, busca geral, busca específica por ID e busca por nome de categoria.
 
 ---
 
@@ -32,6 +35,7 @@ class Categoria {
   - descricao: string
   + findAll() Categoria[]
   + findById() Categoria
+  + findByNome() Categoria[]
   + create() Categoria
   + update() Categoria
   + delete() void
@@ -44,20 +48,24 @@ class Exercicio {
   - tempo: string
   + findAll() Exercicio[]
   + findById() Exercicio
+  + findByNome() Exercicio[]
   + create() Exercicio
   + update() Exercicio
   + delete() void
 }
 class Usuario {
   - nome: string
-  - email: string
+  - usuario: string
   - senha: string
   - foto: string
   - peso: decimal
   - altura: decimal
   - imc: decimal
+  - classificao: string
+  - calcularIMC
   + findAll() Usuario[]
   + findById() Usuario
+  + findByUsuario() Usuario[]
   + create() Usuario
   + update() Usuario
 }
