@@ -9,7 +9,7 @@ export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
     private usuarioRepository: Repository<Usuario>,
-    private bcrypt: Bcrypt
+    private bcrypt: Bcrypt,
   ) {}
 
   async findByUsuario(usuario: string): Promise<Usuario | null> {
@@ -73,6 +73,7 @@ export class UsuarioService {
 
     usuario.imc = imc;
     usuario.classificacao = classificacao;
+    usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha)
 
     return await this.usuarioRepository.save(usuario);
   }

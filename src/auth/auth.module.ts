@@ -7,18 +7,19 @@ import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
 import { LocalStrategy } from './strategy/local.strategy';
 import { JwtStrategy } from './strategy/jwt.strategy';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-    imports: [
-        forwardRef(() => UsuarioModule), 
-        JwtModule.register({
-            secret: jwtConstants.secret,
-            signOptions: {expiresIn: '1h'}
-        })
-
-    ],
-    controllers: [AuthController],
-    providers: [Bcrypt, AuthService, LocalStrategy, JwtStrategy],
-    exports: [Bcrypt],
+  imports: [
+    forwardRef(() => UsuarioModule),
+    PassportModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '1h' },
+    }),
+  ],
+  controllers: [AuthController],
+  providers: [Bcrypt, AuthService, LocalStrategy, JwtStrategy],
+  exports: [Bcrypt],
 })
-export class AuthModule {};
+export class AuthModule {}

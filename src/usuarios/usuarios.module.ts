@@ -11,4 +11,4 @@ import { AuthModule } from '../auth/auth.module';
   controllers: [UsuarioController],
   exports: [UsuarioService],
 })
-export class UsuarioModule {};
+export class UsuarioModule {}
