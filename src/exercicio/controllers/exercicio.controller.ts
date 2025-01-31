@@ -9,10 +9,13 @@ import {
   HttpStatus,
   Delete,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { ExercicioService } from '../services/exercicio.service';
 import { Exercicio } from '../entities/exercicio.entity';
+import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('/exercicios')
 export class ExercicioController {
   constructor(private readonly exercicioService: ExercicioService) {}

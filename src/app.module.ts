@@ -7,6 +7,7 @@ import { Usuario } from './usuarios/entities/usuario.entity';
 import { UsuarioModule } from './usuarios/usuarios.module';
 import { Exercicio } from './exercicio/entities/exercicio.entity';
 import { ExercicioModule } from './exercicio/exercicio.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,6 +26,7 @@ import { ExercicioModule } from './exercicio/exercicio.module';
     CategoriaModule,
     UsuarioModule,
     ExercicioModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
