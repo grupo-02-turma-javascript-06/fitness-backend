@@ -73,7 +73,7 @@ export class UsuarioService {
 
     usuario.imc = imc;
     usuario.classificacao = classificacao;
-    usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha)
+    usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
 
     return await this.usuarioRepository.save(usuario);
   }

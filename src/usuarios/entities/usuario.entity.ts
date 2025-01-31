@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Transform, TransformFnParams } from 'class-transformer';
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
@@ -5,6 +6,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @Transform(({ value }: TransformFnParams) => {
@@ -15,6 +17,7 @@ export class Usuario {
   })
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
+  @ApiProperty()
   nome: string;
 
   @IsEmail()
@@ -26,6 +29,7 @@ export class Usuario {
   })
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
+  @ApiProperty({ example: 'email@email.com.br' })
   usuario: string;
 
   @MinLength(8)
@@ -37,20 +41,26 @@ export class Usuario {
   })
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
+  @ApiProperty()
   senha: string;
 
   @Column({ length: 5000 })
+  @ApiProperty()
   foto: string;
 
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
+  @ApiProperty()
   peso: number;
 
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
+  @ApiProperty()
   altura: number;
 
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
+  @ApiProperty()
   imc: number;
 
   @Column({ length: 255 })
+  @ApiProperty()
   classificacao: string;
 }

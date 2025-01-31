@@ -14,9 +14,12 @@ import {
 import { ExercicioService } from '../services/exercicio.service';
 import { Exercicio } from '../entities/exercicio.entity';
 import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Exercicio')
 @UseGuards(JwtAuthGuard)
 @Controller('/exercicios')
+@ApiBearerAuth()
 export class ExercicioController {
   constructor(private readonly exercicioService: ExercicioService) {}
 

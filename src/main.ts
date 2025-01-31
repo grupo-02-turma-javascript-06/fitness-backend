@@ -1,10 +1,25 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule);
+
+    const config = new DocumentBuilder()
+      .setTitle('Move2Fit')
+      .setDescription('Projeto Fitness')
+      .setContact(
+        'Grupo 02',
+        'https://github.com/grupo-02-turma-javascript-06',
+        'grupo02turmajavacript06@gmail.com',
+      )
+      .setVersion('1.0')
+      .addBearerAuth()
+      .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('/swagger', app, document);
 
     process.env.TZ = '-03:00';
 
