@@ -29,7 +29,7 @@ export class Exercicio {
   @Column({ length: 255, nullable: false })
   descricao: string;
 
-  @IsPositive()
+
   @IsNotEmpty()
   @Transform(({ value }: TransformFnParams) => {
     if (typeof value === 'number') {
@@ -37,7 +37,7 @@ export class Exercicio {
     }
     return 0;
   })
-  @Column({ type: 'decimal', precision: 6, scale: 2, nullable: false })
+  @Column({ type: 'decimal', precision: 6, scale: 2, nullable: true })
   carga: number;
 
   @Column({ type: 'int', default: 0 })
