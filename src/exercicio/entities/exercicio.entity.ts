@@ -1,5 +1,5 @@
 import { Transform, TransformFnParams } from 'class-transformer';
-import { IsNotEmpty, IsPositive, Length } from 'class-validator';
+import { IsNotEmpty, Length } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Categoria } from '../../categoria/entities/categoria.entity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -44,7 +44,7 @@ export class Exercicio {
   @ApiProperty()
   carga: number;
 
-  @Column({ type: 'int', default: 0 })
+  @Column({ type: 'int', nullable: true })
   @ApiProperty()
   repeticao: number;
 
