@@ -1,9 +1,9 @@
-# - Backend
+# Move2Fit - Backend
 
 <br />
 
 <div align="center">
-  <img src="" />
+  <img src="./docs/images/logo-fundo-branco.png" />
 </div>
 
 <br /><br />
@@ -76,10 +76,8 @@ Exercicio <|-- Categoria
 
 ## 4. Diagrama Entidade-Relacionamento (DER)
 
-Adicione a imagem do Diagrama
-
 <div align="center">
-  <img src="" />
+  <img src="./docs/images/diagrama-entidade-relacionamento.png" />
 </div>
 
 ---
