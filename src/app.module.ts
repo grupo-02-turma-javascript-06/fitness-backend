@@ -15,6 +15,7 @@ import { ProdService } from './data/services/prod.service';
     }),
     TypeOrmModule.forRootAsync({
       useClass: ProdService,
+      // useClass: DevService,
       imports: [ConfigModule],
     }),
     CategoriaModule,

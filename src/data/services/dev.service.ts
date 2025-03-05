@@ -10,7 +10,7 @@ export class DevService implements TypeOrmOptionsFactory {
     return {
       type: 'mysql',
       host: process.env.DB_HOST || 'localhost',
-      port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 3306,
+      port: process.env.MYSQL_PORT_INTERNAL ? parseInt(process.env.MYSQL_PORT_INTERNAL) : 3306,
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || 'root',
       database: process.env.DB_NAME || 'db_fitness',
