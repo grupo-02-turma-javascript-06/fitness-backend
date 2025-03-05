@@ -52,6 +52,10 @@ export class Exercicio {
   @ApiProperty()
   tempo: string;
 
+  @Column({ length: 5000 })
+  @ApiProperty()
+  foto: string;
+
   @ApiProperty({ type: () => Categoria })
   @ManyToOne(() => Categoria, (categoria) => categoria.exercicio, {
     onDelete: 'CASCADE',

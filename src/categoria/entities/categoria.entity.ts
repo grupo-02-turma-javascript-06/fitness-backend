@@ -32,6 +32,10 @@ export class Categoria {
   @Column({ length: 255, nullable: false })
   descricao: string;
 
+  @Column({ length: 5000 })
+  @ApiProperty()
+  icone: string;
+
   @ApiProperty()
   @OneToMany(() => Exercicio, (exercicio) => exercicio.categoria)
   exercicio: Exercicio[];
