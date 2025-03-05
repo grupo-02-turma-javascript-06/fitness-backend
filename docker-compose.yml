@@ -34,8 +34,8 @@ services:
     ports:
       - "${APP_PORT_EXTERNAL:-3000}:${APP_PORT:-3000}"
     volumes:
-      - .:/usr/src/app
-      - ./node_modules:/usr/src/app/node_modules
+      - .:/home/node/app
+      - /home/node/app/node_modules
     environment:
       - PORT=${APP_PORT:-3000}
       - DATABASE_HOST=${DB_HOST:-db}
@@ -64,6 +64,7 @@ networks:
   app-network:
     name: ${NETWORK_NAME:-network-fitness}
     driver: bridge
+    external: ${NETWORK_EXTERNAL:-false}
 
 volumes:
   mysql_data:
