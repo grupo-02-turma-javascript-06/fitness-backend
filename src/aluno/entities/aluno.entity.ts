@@ -1,14 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform, TransformFnParams } from 'class-transformer';
-import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { IsEmail, IsNotEmpty } from 'class-validator';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Exercicio } from '../../exercicio/entities/exercicio.entity';
 
-@Entity({ name: 'tb_usuarios' })
-export class Usuario {
-  @PrimaryGeneratedColumn()
+@Entity({ name: 'tb_alunos' })
+export class Aluno {
   @ApiProperty()
+  @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @Transform(({ value }: TransformFnParams) => {
     if (typeof value === 'string') {
       return value.trim();
@@ -17,9 +19,9 @@ export class Usuario {
   })
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
-  @ApiProperty()
   nome: string;
 
+  @ApiProperty()
   @IsEmail()
   @Transform(({ value }: TransformFnParams) => {
     if (typeof value === 'string') {
@@ -29,38 +31,30 @@ export class Usuario {
   })
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
-  @ApiProperty()
-  usuario: string;
+  email: string;
 
-  @MinLength(8)
-  @Transform(({ value }: TransformFnParams) => {
-    if (typeof value === 'string') {
-      return value.trim();
-    }
-    return '';
-  })
-  @IsNotEmpty()
-  @Column({ length: 255, nullable: false })
   @ApiProperty()
-  senha: string;
-
   @Column({ length: 5000 })
-  @ApiProperty()
   foto: string;
 
-  @Column('decimal', { precision: 10, scale: 2, nullable: false })
   @ApiProperty()
+  @Column('decimal', { precision: 10, scale: 2, nullable: false })
   peso: number;
 
-  @Column('decimal', { precision: 10, scale: 2, nullable: false })
   @ApiProperty()
+  @Column('decimal', { precision: 10, scale: 2, nullable: false })
   altura: number;
 
-  @Column('decimal', { precision: 10, scale: 2, nullable: false })
   @ApiProperty()
+  @Column('decimal', { precision: 10, scale: 2, nullable: false })
   imc: number;
 
-  @Column({ length: 255 })
   @ApiProperty()
+  @Column({ length: 255 })
   classificacao: string;
+
+  @ApiProperty({ type: () => Exercicio })
+  @ManyToMany(() => Exercicio, (exercicio) => exercicio.aluno)
+  @JoinTable()
+  exercicio: Exercicio[];
 }
