@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { DevService } from './data/services/dev.service';
 import { ProdService } from './data/services/prod.service';
+import { AlunoModule } from './aluno/aluno.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -18,6 +19,7 @@ import { ProdService } from './data/services/prod.service';
       // useClass: DevService,
       imports: [ConfigModule],
     }),
+    AlunoModule,
     CategoriaModule,
     UsuarioModule,
     ExercicioModule,

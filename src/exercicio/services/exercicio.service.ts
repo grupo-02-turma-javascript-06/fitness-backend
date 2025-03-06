@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ILike, Repository } from 'typeorm';
+import { ILike, In, Repository } from 'typeorm';
 import { Exercicio } from '../entities/exercicio.entity';
 
 @Injectable()
@@ -43,6 +43,15 @@ export class ExercicioService {
       },
     });
   }
+
+  async findByIds(ids: number[]): Promise<Exercicio[]> {
+    if (!ids || ids.length === 0) {
+      return [];
+    }
+
+    return await this.exercicioRepository.findBy({ id: In(ids) });
+  }
+
 
   async create(exercicio: Exercicio): Promise<Exercicio> {
     return await this.exercicioRepository.save(exercicio);

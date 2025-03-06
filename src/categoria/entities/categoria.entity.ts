@@ -36,7 +36,7 @@ export class Categoria {
   @ApiProperty()
   icone: string;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => Exercicio })
   @OneToMany(() => Exercicio, (exercicio) => exercicio.categoria)
   exercicio: Exercicio[];
 }
