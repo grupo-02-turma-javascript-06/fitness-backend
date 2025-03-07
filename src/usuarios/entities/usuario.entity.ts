@@ -56,11 +56,4 @@ export class Usuario {
   @ApiProperty()
   altura: number;
 
-  @Column('decimal', { precision: 10, scale: 2, nullable: false })
-  @ApiProperty()
-  imc: number;
-
-  @Column({ length: 255 })
-  @ApiProperty()
-  classificacao: string;
 }

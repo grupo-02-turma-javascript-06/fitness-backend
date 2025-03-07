@@ -47,14 +47,6 @@ export class UsuarioService {
       throw new HttpException('O Usuario já existe!', HttpStatus.BAD_REQUEST);
     usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
 
-    const { imc, classificacao } = this.calcularIMC(
-      usuario.peso,
-      usuario.altura,
-    );
-
-    usuario.imc = imc;
-    usuario.classificacao = classificacao;
-
     return await this.usuarioRepository.save(usuario);
   }
 
@@ -66,43 +58,21 @@ export class UsuarioService {
     if (buscaUsuario && buscaUsuario.id !== usuario.id)
       throw new HttpException('O Usuario já existe!', HttpStatus.BAD_REQUEST);
 
-    const { imc, classificacao } = this.calcularIMC(
-      usuario.peso,
-      usuario.altura,
-    );
 
-    usuario.imc = imc;
-    usuario.classificacao = classificacao;
+
+    
     usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
 
     return await this.usuarioRepository.save(usuario);
   }
+  
+  async calcularIMC(id: number): Promise<number> {
 
-  calcularIMC = (
-    peso: number,
-    altura: number,
-  ): { imc: number; classificacao: string } => {
-    if (peso <= 0 || altura <= 0) {
-      throw new HttpException(
-        'Peso e altura devem conter valores válidos',
-        HttpStatus.BAD_REQUEST,
-      );
+    const usuario = await this.findById(id)
+
+    if (usuario.altura > 0) {
+      return usuario.peso / (usuario.altura * usuario.altura);
     }
-
-    const imc = peso / (altura * altura);
-    const imcArredondado = parseFloat(imc.toFixed(2));
-
-    const classificarIMC = (imc: number): string => {
-      if (imc < 18.5) return 'Abaixo do peso';
-      if (imc < 24.9) return 'Peso normal';
-      if (imc < 29.9) return 'Sobrepeso';
-      if (imc < 34.9) return 'Obesidade Grau I';
-      if (imc < 39.9) return 'Obesidade Grau II';
-      return 'Obesidade Grau III (Mórbida)';
-    };
-
-    const classificacao = classificarIMC(imcArredondado);
-
-    return { imc: imcArredondado, classificacao };
-  };
+    return 0;
+  }
 }

@@ -47,4 +47,11 @@ export class UsuarioController {
   async update(@Body() usuario: Usuario): Promise<Usuario> {
     return this.usuarioService.update(usuario);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/imc/:id')
+  @HttpCode(HttpStatus.OK)
+  calcularIMC(@Param('id', ParseIntPipe) id: number): Promise<Number>{
+      return this.usuarioService.calcularIMC(id)
+  }
 }
