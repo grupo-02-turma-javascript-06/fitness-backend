@@ -56,7 +56,7 @@ export class Usuario {
   @ApiProperty()
   altura: number;
 
-  @Column('decimal', { precision: 10, scale: 2, nullable: false })
+  @Column('decimal', { precision: 10, scale: 2})
   @ApiProperty()
   imc: number;
 
