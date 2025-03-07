@@ -3,6 +3,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Bcrypt } from '../bcrypt/bcrypt';
 import { UsuarioLogin } from '../entities/usuariologin.entity';
 import { UsuarioService } from '../../usuarios/services/usuario.service';
+import { pseudoRandomBytes } from 'crypto';
 
 @Injectable()
 export class AuthService {
@@ -49,6 +50,10 @@ export class AuthService {
       usuario: usuarioLogin.usuario,
       senha: '',
       foto: buscaUsuario.foto,
+      peso:buscaUsuario.peso,
+      altura:buscaUsuario.altura,
+      imc:buscaUsuario.imc,
+      classificacao:buscaUsuario.classificacao,
       token: `Bearer ${this.jwtService.sign(payload)}`,
     };
   }
