@@ -16,8 +16,8 @@ import { AwsService } from './data/services/aws.service';
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
-      // useClass: ProdService,
-      useClass: AwsService,
+      useClass: ProdService,
+      // useClass: AwsService,
       // useClass: DevService,
       imports: [ConfigModule],
     }),
